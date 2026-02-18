@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travel-apis-deployment
+spec:
+  replicas: 3  
+  selector:
+    matchLabels:
+      app: travel-apis
+      
+  template:
+    metadata:
+      labels:
+        app: travel-apis
+        project: voyage-capstone
+    spec:
+      containers:
+      - name: travel-apis-container
+        image: dkhan123/travel_apis:latest  
+        ports:
+        - containerPort: 5000               
+        resources:                         
+          requests:
+            cpu: "150m"
+            memory: "164Mi"
+          limits:
+            cpu: "200m"
+            memory: "228Mi"
+        env:                                
+        - name: FLASK_ENV
+          value: "production"
+
